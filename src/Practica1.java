@@ -1,49 +1,46 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Practica1 {
     public static void main(String[] args) {
-        //leer el archivo con los registros
-        File archivo = null;
-        FileReader fr = null;
-        BufferedReader br = null;
+        Fichero ficheroAlumnos = new Fichero();
+        ArrayList<Alumno> alumnoArrayList = ficheroAlumnos.leerFicheroConTodosAlumnos();
+        alumnoArrayList = seleccionarAlumnos(alumnoArrayList);
+        alumnoArrayList = notasAlumnos(alumnoArrayList);
 
-        // genero dos arrayLists, uno con todos los alumnos
-        // y uno donde guardo los seleccionados
-        ArrayList<String> arrayAlumnos = new ArrayList<String>();
-        ArrayList<String> alumnosRandom = new ArrayList<String>();
-        ArrayList<Double> notasRandom = new ArrayList<Double>();
-        try {
-            archivo = new File("D:\\2º DAM\\P. multimedia y dispositivos moviles\\Listado.csv");
-            fr = new FileReader(archivo);
-            br = new BufferedReader(fr);
-
-            // guardo en el arrayList todos los alumnos
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                arrayAlumnos.add(linea);
-            }
-
-            //Guardar los 10 alumnos seleccionados en el arrayList alumnosRandom
-            int posicionAlumno;
-            for (int i = 0; i < 10; i++) {
-                posicionAlumno = (int) (Math.random() * 79);
-                alumnosRandom.add(arrayAlumnos.get(posicionAlumno));
-                System.out.println(alumnosRandom.get(i));
-            }
-
-            //Generar notas aleatorias
-            for (int i = 0; i < 10; i++) {
-                Double nota = (Math.random() * 10);
-                notasRandom.add(nota);
-                System.out.println(notasRandom.get(i));
-            }
-        } catch (IOException error) {
-            error.printStackTrace();
+    }
+    //metodo para generar numero aleatorio
+    public static ArrayList<Alumno> seleccionarAlumnos(ArrayList<Alumno> arrAlumno){
+        ArrayList<Alumno> alumnosRandom = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            int numeroAlumno = (int)(Math.random()*79);
+            alumnosRandom.add(arrAlumno.get(numeroAlumno));
         }
+        return alumnosRandom;
+    }
+
+    public static ArrayList<Alumno> notasAlumnos(ArrayList<Alumno> arrayAlumnos) {
+        ArrayList<Alumno> arrayNotasAlumno = new ArrayList<Alumno>();
+        Double[] cantidadNotas = new Double[4];
+        double notaGeneradaRandom = 0;
+        double sumaNotas = 0;
+        for (int i = 0; i < 10; i++) {
+            sumaNotas = 0;
+            for (int j = 0; j < cantidadNotas.length; j++) {
+                notaGeneradaRandom = (Math.random() * 10);
+                cantidadNotas[j] = notaGeneradaRandom;
+                sumaNotas += notaGeneradaRandom;
+            }
+            arrayNotasAlumno.get(i).setNota1(cantidadNotas[0]);
+            arrayNotasAlumno.get(i).setNota2(cantidadNotas[1]);
+            arrayNotasAlumno.get(i).setNota3(cantidadNotas[2]);
+            arrayNotasAlumno.get(i).setNota4(cantidadNotas[3]);
+            double media = sumaNotas / 4;
+            arrayNotasAlumno.get(i).setMedia(media);
+        }
+
+        return arrayNotasAlumno;
     }
 }
