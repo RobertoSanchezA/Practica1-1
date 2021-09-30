@@ -3,25 +3,6 @@ import java.util.*;
 
 public class Fichero {
 
-    String ficheroAlumnos;
-    String ficheroAlumnosRandom;
-
-    public String getFicheroAlumnos() {
-        return ficheroAlumnos;
-    }
-
-    public void setFicheroAlumnos(String ficheroAlumnos) {
-        this.ficheroAlumnos = ficheroAlumnos;
-    }
-
-    public String getFicheroAlumnosRandom() {
-        return ficheroAlumnosRandom;
-    }
-
-    public void setFicheroAlumnosRandom(String ficheroAlumnosRandom) {
-        this.ficheroAlumnosRandom = ficheroAlumnosRandom;
-    }
-
     public  ArrayList<Alumno> leerFicheroConTodosAlumnos(){
         ArrayList<Alumno> arrayAlumnos = new ArrayList<Alumno>();
         File fichero = new File("..\\Listado.csv");
@@ -46,14 +27,23 @@ public class Fichero {
     public void crearFicheroSalida(ArrayList<Alumno> arrAlumno) throws IOException {
         File ficheroSalida = new File("..\\prueba.txt");
         BufferedWriter bf = new BufferedWriter(new FileWriter(ficheroSalida));
+        String cabecera = "Nombre   Nota1   Nota2   Nota3   Nota4 \n";
+        bf.write(cabecera);
+        System.out.print(cabecera);
+        for (Alumno alumno : arrAlumno) {
+            bf.write(alumno.getNombre() + ", \t \t" +
+                    String.format("%.2f", alumno.getNota1()) + ", \t\t" +
+                    String.format("%.2f", alumno.getNota2()) + ", \t\t" +
+                    String.format("%.2f", alumno.getNota3()) + ", \t\t" +
+                    String.format("%.2f", alumno.getNota4()) + " \t\t media -> " + String.format("%.2f", alumno.getMedia()) + "\n");
 
-        for (int i = 0; i < arrAlumno.size(); i++) {
-            bf.write(arrAlumno.get(i).getNombre() + ", " +
-                        arrAlumno.get(i).getNota1()+ ", " +
-                        arrAlumno.get(i).getNota2()+ ", " +
-                        arrAlumno.get(i).getNota3()+ ", " +
-                        arrAlumno.get(i).getNota4()+ ", " +
-                        arrAlumno.get(i).getMedia());
+            System.out.print(
+                    alumno.getNombre() + ", " +
+                    String.format("%.2f", alumno.getNota1()) + ", \t\t" +
+                    String.format("%.2f", alumno.getNota2()) + ", \t\t" +
+                    String.format("%.2f", alumno.getNota3()) + ", \t\t" +
+                    String.format("%.2f", alumno.getNota4()) + " \t\t media -> " + String.format("%.2f", alumno.getMedia()) + "\n"
+            );
         }
 
         bf.flush();
