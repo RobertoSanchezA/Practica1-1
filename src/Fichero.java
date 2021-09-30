@@ -31,18 +31,21 @@ public class Fichero {
         bf.write(cabecera);
         System.out.print(cabecera);
         for (Alumno alumno : arrAlumno) {
-            bf.write(alumno.getNombre() + ", \t \t" +
-                    String.format("%.2f", alumno.getNota1()) + ", \t\t" +
-                    String.format("%.2f", alumno.getNota2()) + ", \t\t" +
-                    String.format("%.2f", alumno.getNota3()) + ", \t\t" +
-                    String.format("%.2f", alumno.getNota4()) + " \t\t media -> " + String.format("%.2f", alumno.getMedia()) + "\n");
+            bf.write(alumno.getNombre() + ", \t " +
+                    String.format("%.2f", alumno.getNota1()) + ", \t " +
+                    String.format("%.2f", alumno.getNota2()) + ", \t " +
+                    String.format("%.2f", alumno.getNota3()) + ", \t " +
+                    String.format("%.2f", alumno.getNota4()) + " \t  media -> " + String.format("%.2f", alumno.getMedia()) + "\n" +
+                    "---------------------- \n"
+            );
 
             System.out.print(
-                    alumno.getNombre() + ", " +
-                    String.format("%.2f", alumno.getNota1()) + ", \t\t" +
-                    String.format("%.2f", alumno.getNota2()) + ", \t\t" +
-                    String.format("%.2f", alumno.getNota3()) + ", \t\t" +
-                    String.format("%.2f", alumno.getNota4()) + " \t\t media -> " + String.format("%.2f", alumno.getMedia()) + "\n"
+                    alumno.getNombre() + ", \t" +
+                    String.format("%.2f", alumno.getNota1()) + ", \t" +
+                    String.format("%.2f", alumno.getNota2()) + ", \t" +
+                    String.format("%.2f", alumno.getNota3()) + ", \t" +
+                    String.format("%.2f", alumno.getNota4()) + " \t media -> " + String.format("%.2f", alumno.getMedia()) + "\n" +
+                    "---------------------- \n"
             );
         }
 
